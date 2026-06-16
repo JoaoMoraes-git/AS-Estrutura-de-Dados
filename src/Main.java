@@ -5,9 +5,14 @@ void main() {
 
     Tipo profissao = new Tipo();
     Tabuleiro tabuleiro = new Tabuleiro<>();
-    Jogador j = new Jogador("Player 1", profissao, 2500.00);
+    OrdemJogadores ordem = new OrdemJogadores<>();
+    Jogador j1 = new Jogador("Player 1", profissao, 2500.00);
+    Jogador j2 = new Jogador("Player 2", profissao, 2500.00);
 
-    tabuleiro.inserirNoFim("Campo 1");
+    ordem.inserirNoFim(j1);
+    ordem.inserirNoFim(j2);
+
+    tabuleiro.inserirNoFim("[Início]");
     tabuleiro.inserirNoFim("Campo 2");
     tabuleiro.inserirNoFim("Campo 3");
     tabuleiro.inserirNoFim("Campo 4");
@@ -29,14 +34,24 @@ void main() {
     //Partida em andamento
     int turnosRestantes = 3;
     while (turnosRestantes > 0) {
+        tabuleiro.imprimir();
+
+        System.out.println("1 - Andar casas");
         escolha = input.nextInt();
-        if (escolha == 1){
-            tabuleiro.imprimir();
-        } else if (escolha == 2){
-            System.out.println(tabuleiro.rolagem());
-        } else if (escolha == 3){
-            tabuleiro.avancar();
+
+        switch (escolha){
+            case 1:
+                int valorRoll = tabuleiro.rolagem();
+                System.out.println("[Nome aqui]" + " Andou " + valorRoll + " casas!");
+
+
+                break;
+
+            default:
+                System.out.println("Opção inválida");
+                break;
         }
+
 
         turnosRestantes--;
         
