@@ -1,8 +1,8 @@
 import java.util.Random;
 
 public class Tabuleiro<T> {
-    private No<T> fim;
-    private No<T> casaAtual;
+    private Casa<T> fim;
+    private Casa<T> casaAtual;
     private int tamanho;
 
     Random dado = new Random();
@@ -12,14 +12,14 @@ public class Tabuleiro<T> {
     }
 
     public void inserirNoFim(T valor) {
-        No<T> novo = new No<>(valor);
+        Casa<T> CasaNova = new Casa<>(valor);
         if (fim == null) {
-            fim = novo;
+            fim = CasaNova;
             fim.proximo = fim;
         } else {
-            novo.proximo = fim.proximo;
-            fim.proximo = novo;
-            fim = novo;
+            CasaNova.proximo = fim.proximo;
+            fim.proximo = CasaNova;
+            fim = CasaNova;
         }
     }
 
@@ -27,7 +27,7 @@ public class Tabuleiro<T> {
 
         int valorRoll = rolagem();
 
-        for (int i = valorRoll; i > 0; i--){ //A primeira rolagem está errada, andando uma casa a menos, como se começasse em um campo 0 ao invés de 1
+        for (int i = valorRoll; i > 0; i--){ //A primeira rolagem está errada, andando uma casa a meCasas, como se começasse em um campo 0 ao invés de 1
             if (casaAtual == null){
                 casaAtual = fim.proximo;
             } else {
@@ -35,7 +35,7 @@ public class Tabuleiro<T> {
             }
         }
 
-        System.out.println(casaAtual.dado);
+        System.out.println(casaAtual.elemento);
         System.out.println("Você andou " + valorRoll + " casas");
     }
 
@@ -46,8 +46,8 @@ public class Tabuleiro<T> {
 
     public T removerNoInicio() {
         if (fim == null) return null;
-        No<T> inicio = fim.proximo;
-        T valor = inicio.dado;
+        Casa<T> inicio = fim.proximo;
+        T valor = inicio.elemento;
         if (fim == inicio) {
             fim = null;
         } else {
@@ -58,18 +58,19 @@ public class Tabuleiro<T> {
 
     public void imprimir() {
         if (fim == null) return;
-        No<T> atual = fim.proximo;
+        Casa<T> atual = fim.proximo;
         do {
-            System.out.print(atual.dado + " ");
+            System.out.print(atual.elemento + " ");
             atual = atual.proximo;
         } while (atual != fim.proximo);
         System.out.println();
     }
 
-    public void getPosAtual() {
-        if (fim == null) return;
+    public Casa getPosAtual() {
+        if (fim == null) return null;
 
 
+        return null;
     }
 
 }
