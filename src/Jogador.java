@@ -1,21 +1,20 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class Jogador {
     private String nome;
-    private double saldo;
+    public double saldo;
     private Casa posAtual;
     private List<Imovel> propriedades;
-    private Tipo profissao;
+    private Profissao profissao;
 
-    public Jogador(String nome, double saldo, Casa posAtual, Tipo profissao) {
+    public Jogador(String nome, double saldo, Casa posAtual, Profissao profissao) {
         this.nome = nome;
         this.saldo = saldo;
         this.posAtual = posAtual;
         this.profissao = profissao;
     }
 
-    public Jogador(String nome, Tipo profissao, double saldo) {
+    public Jogador(String nome, Profissao profissao, double saldo) {
         this.nome = nome;
         this.profissao = profissao;
         this.saldo = saldo;
@@ -53,11 +52,11 @@ public class Jogador {
         this.propriedades = propriedades;
     }
 
-    public Tipo getProfissao() {
+    public Profissao getProfissao() {
         return profissao;
     }
 
-    public void setProfissao(Tipo profissao) {
+    public void setProfissao(Profissao profissao) {
         this.profissao = profissao;
     }
 

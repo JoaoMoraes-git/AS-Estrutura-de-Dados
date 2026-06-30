@@ -3,7 +3,7 @@ void main() {
     Scanner input = new Scanner(System.in);
     int escolha = 0;
 
-    Tipo profissao = new Tipo();
+    Profissao profissao = new Profissao();
     Tabuleiro tabuleiro = new Tabuleiro<>();
     Jogo jogo = new Jogo();
 
