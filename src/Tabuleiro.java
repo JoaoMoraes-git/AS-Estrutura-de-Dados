@@ -55,6 +55,30 @@ public class Tabuleiro<T> {
         return valorRoll;
     }
 
+    public int moverJogador(Jogador j, int qtdCasas, boolean andandoFrente) {
+        Casa<T> posicao = j.getPosAtual();
+        System.out.println(j.getNome() + (andandoFrente ? " andou " : " voltou ") + qtdCasas + " casas");
+
+        for (int i = 0; i < qtdCasas; i++) {
+            if (andandoFrente) {
+                posicao = posicao.proximo;
+
+                // Dá o salário se passar pelo Início
+                if (posicao.elemento instanceof Inicio) {
+                    ((Inicio) posicao.elemento).acao(j);
+                }
+            } else {
+                // Se for para trás, só recua sem checar salário
+                posicao = posicao.anterior;
+            }
+        }
+
+        j.setPosAtual(posicao);
+        System.out.println(j.getNome() + " parou na casa " + j.getPosAtual().elemento);
+
+        return qtdCasas;
+    }
+
 
     public int rolagem() {
         int valorRoll = dado.nextInt(1, 7) + dado.nextInt(1, 7);
