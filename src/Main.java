@@ -16,7 +16,7 @@ void main() {
     jogo.jogadores.add(j3);
     System.out.println(jogo.jogadores.get(0));
 
-    //Adicionar jogador ao arraylist de jogo aqui
+    // Adicionar jogador ao arraylist de jogo aqui
 
     tabuleiro.inserirNoFim("[Início]");
     tabuleiro.inserirNoFim("Campo 2");
@@ -31,36 +31,33 @@ void main() {
     tabuleiro.inserirNoFim("Campo 11");
     tabuleiro.inserirNoFim("Campo 12");
 
-    int qtdJogadores = jogo.jogadores.size() - 1;
+    int qtdJogadores = jogo.jogadores.size();
     int ordemAtual = 0;
 
-    //Configuração pré-jogo
+    // Configuração pré-jogo
     while (true) {
         System.out.println("Configurações iniciais");
-        for (int i = 0; i <= qtdJogadores; i++){
+        for (int i = 0; i < qtdJogadores; i++) {
             jogo.jogadores.get(i).setPosAtual(tabuleiro.getPosAtual());
         }
         break;
     }
 
-
-
-
-    //Partida em andamento
-    int turnosRestantes = 3;
+    // Partida em andamento
+    int turnosRestantes = 10;
     while (turnosRestantes > 0) {
         Jogador jogadorAtual = jogo.jogadores.get(ordemAtual);
 
-        tabuleiro.imprimir();
+        System.out.println("--Turnos restantes: " + turnosRestantes);
+        System.out.println("|" + jogadorAtual.getNome() + "|" + jogadorAtual.getPosAtual().elemento);
+        //tabuleiro.imprimir();
 
-        System.out.println("|" + jogadorAtual.getNome() + "|");
-        System.out.println("1 - Andar casas");
-        System.out.println("Turnos restantes: " + turnosRestantes);
+        // System.out.println("1 - Andar casas");
         escolha = input.nextInt();
 
-        switch (escolha){
+        switch (escolha) {
             case 1:
-                int valorRoll = tabuleiro.rolagem();
+                int valorRoll = tabuleiro.moverJogador(jogadorAtual);
                 System.out.println(jogadorAtual.getNome() + " Andou " + valorRoll + " casas!");
                 break;
 
@@ -69,18 +66,16 @@ void main() {
                 break;
         }
 
+        ordemAtual++;
 
-        if (ordemAtual == qtdJogadores){
+        if (ordemAtual == qtdJogadores) {
             System.out.println("Fim do turno");
             turnosRestantes--;
             ordemAtual = 0;
-        } else {
-            ordemAtual++;
         }
 
-        
     }
 
     System.out.println("Fim De Jogo");
-    //Colocar rank final
+    // Colocar rank final
 }

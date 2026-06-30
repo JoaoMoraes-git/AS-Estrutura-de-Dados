@@ -4,11 +4,11 @@ import java.util.List;
 public class Jogador {
     private String nome;
     private double saldo;
-    private Casa<Casa> posAtual;
+    private Casa posAtual;
     private List<Imovel> propriedades;
     private Tipo profissao;
 
-    public Jogador(String nome, double saldo, Casa<Casa> posAtual, Tipo profissao) {
+    public Jogador(String nome, double saldo, Casa posAtual, Tipo profissao) {
         this.nome = nome;
         this.saldo = saldo;
         this.posAtual = posAtual;

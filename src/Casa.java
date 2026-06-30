@@ -1,12 +1,10 @@
 public class Casa<T> {
     T elemento;
-    Casa anterior;
-    Casa proximo;
+    Casa<T> anterior;
+    Casa<T> proximo;
     String tipo;
-
     public Casa(T elemento){
-        this.anterior = null;
-        this.proximo = null;
+        this.elemento = elemento;
         this.tipo = tipo;
     }
 }

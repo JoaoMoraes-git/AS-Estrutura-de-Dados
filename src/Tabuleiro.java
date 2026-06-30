@@ -1,43 +1,52 @@
 import java.util.Random;
 
 public class Tabuleiro<T> {
+    private Casa<T> inicio;
     private Casa<T> fim;
-    private Casa<T> casaAtual;
     private int tamanho;
+
 
     Random dado = new Random();
 
     public Tabuleiro() {
+        this.inicio = null;
         this.fim = null;
+        this.tamanho = 0;
     }
 
     public void inserirNoFim(T valor) {
         Casa<T> CasaNova = new Casa<>(valor);
-        if (fim == null) {
+        if (inicio == null) {
+            inicio = CasaNova;
             fim = CasaNova;
-            fim.proximo = fim;
+            inicio.proximo = inicio;
+            inicio.anterior = inicio;
         } else {
-            CasaNova.proximo = fim.proximo;
+            CasaNova.proximo = inicio;
+            CasaNova.anterior = fim;
             fim.proximo = CasaNova;
+            inicio.anterior = CasaNova;
             fim = CasaNova;
         }
+        tamanho++;
     }
 
-    public void avancar(){
-
+    public int moverJogador(Jogador j){
         int valorRoll = rolagem();
+        System.out.println(j.getNome() + " andou " + valorRoll + " casas");
 
-        for (int i = valorRoll; i > 0; i--){ //A primeira rolagem está errada, andando uma casa a meCasas, como se começasse em um campo 0 ao invés de 1
-            if (casaAtual == null){
-                casaAtual = fim.proximo;
-            } else {
-                casaAtual = casaAtual.proximo;
-            }
+        Casa<T> posicao = j.getPosAtual();
+
+        for (int i = 0; i < valorRoll; i++){
+            posicao = posicao.proximo;
         }
 
-        System.out.println(casaAtual.elemento);
-        System.out.println("Você andou " + valorRoll + " casas");
+        j.setPosAtual(posicao);
+        System.out.println(j.getNome() + " caiu na casa " + j.getPosAtual().elemento);
+
+        return valorRoll;
     }
+
 
     public int rolagem() {
         int valorRoll = dado.nextInt(1, 7) + dado.nextInt(1, 7);
@@ -45,32 +54,32 @@ public class Tabuleiro<T> {
     }
 
     public T removerNoInicio() {
-        if (fim == null) return null;
-        Casa<T> inicio = fim.proximo;
+        if (inicio == null) return null;
         T valor = inicio.elemento;
-        if (fim == inicio) {
+        if (inicio == fim) {
+            inicio = null;
             fim = null;
         } else {
-            fim.proximo = inicio.proximo;
+            inicio = inicio.proximo;
+            inicio.anterior = fim;
+            fim.proximo = inicio;
         }
+        tamanho--;
         return valor;
     }
 
     public void imprimir() {
-        if (fim == null) return;
-        Casa<T> atual = fim.proximo;
+        if (inicio == null) return;
+        Casa<T> atual = inicio;
         do {
             System.out.print(atual.elemento + " ");
             atual = atual.proximo;
-        } while (atual != fim.proximo);
+        } while (atual != inicio);
         System.out.println();
     }
 
-    public Casa getPosAtual() {
-        if (fim == null) return null;
-
-
-        return null;
+    public Casa<T> getPosAtual() {
+        return inicio;
     }
 
 }
