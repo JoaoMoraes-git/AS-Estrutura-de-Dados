@@ -32,7 +32,7 @@ public class Imovel implements TipoCasa{
 
             System.out.println("Este imóvel não tem um proprietário, deseja comprar por R$" + this.preco + "?");
             System.out.println("S. sim\nN. não");
-            String escolha = input.nextLine().toLowerCase().trim();
+            String escolha = input.next().toLowerCase().trim();
 
             switch (escolha){
                 case "s":
@@ -60,13 +60,12 @@ public class Imovel implements TipoCasa{
         }
 
         else {
+            double pagarAluguel = aluguelAtual * jogador.getProfissao().getMultiAluguelPago() * dono.getProfissao().getMultiAluguelRecebido();
+
             System.out.println("A propriedade " + this.nome + " percentece a " + dono.getNome() + ", você pagou o aluguel de R$" + aluguelAtual);
-            jogador.saldo -= aluguelAtual;
-            dono.saldo += aluguelAtual;
+            jogador.saldo -= pagarAluguel;
+            dono.saldo += pagarAluguel;
         }
-
-
-
 
         //Acréscimo de aluguel
         if (jogador != dono){
@@ -76,8 +75,9 @@ public class Imovel implements TipoCasa{
                 this.multiplicador += 0.1;
             }
         }
+    }
 
-
-
+    public void perdeuDono(){
+        this.dono = null;
     }
 }

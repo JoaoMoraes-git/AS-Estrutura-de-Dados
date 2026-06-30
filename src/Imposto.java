@@ -4,7 +4,7 @@ public class Imposto implements TipoCasa {
     public void acao(Jogador jogador) {
         double valorImposto = jogador.saldo * 0.05;
 
-        jogador.saldo -= valorImposto;
+        jogador.saldo -= valorImposto * jogador.getProfissao().getMultiImposto();
 
         System.out.println(jogador.getNome() + " caiu na casa de impostos e pagou " + valorImposto);
     }
