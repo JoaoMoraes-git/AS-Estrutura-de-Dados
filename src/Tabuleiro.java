@@ -31,14 +31,22 @@ public class Tabuleiro<T> {
         tamanho++;
     }
 
-    public int moverJogador(Jogador j){
+    public int moverJogador(Jogador j, boolean andandoFrente){
         int valorRoll = rolagem();
+        Casa<T> posicao = j.getPosAtual();
         System.out.println(j.getNome() + " andou " + valorRoll + " casas");
 
-        Casa<T> posicao = j.getPosAtual();
-
         for (int i = 0; i < valorRoll; i++){
-            posicao = posicao.proximo;
+            if (andandoFrente) {
+                posicao = posicao.proximo;
+
+                if (posicao.elemento instanceof Inicio) {
+                    ((Inicio) posicao.elemento).acao(j);
+                }
+            } else {
+                posicao = posicao.anterior;
+            }
+
         }
 
         j.setPosAtual(posicao);

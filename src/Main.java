@@ -3,7 +3,8 @@ void main() {
     Scanner input = new Scanner(System.in);
     int escolha = 0;
 
-    Profissao profissao = new Profissao();
+    Profissao profissao = new Profissao(); //Fazer o sistema de profissão
+
     Tabuleiro tabuleiro = new Tabuleiro<>();
     Jogo jogo = new Jogo();
 
@@ -16,20 +17,26 @@ void main() {
     jogo.jogadores.add(j3);
     System.out.println(jogo.jogadores.get(0));
 
+    Inicio casaInicio = new Inicio(100000.00);
+    tabuleiro.inserirNoFim(casaInicio);
+
     // Adicionar jogador ao arraylist de jogo aqui
 
-    tabuleiro.inserirNoFim("[Início]");
-    tabuleiro.inserirNoFim("Campo 2");
-    tabuleiro.inserirNoFim("Campo 3");
-    tabuleiro.inserirNoFim("Campo 4");
-    tabuleiro.inserirNoFim("Campo 5");
-    tabuleiro.inserirNoFim("Campo 6");
-    tabuleiro.inserirNoFim("Campo 7");
-    tabuleiro.inserirNoFim("Campo 8");
-    tabuleiro.inserirNoFim("Campo 9");
-    tabuleiro.inserirNoFim("Campo 10");
-    tabuleiro.inserirNoFim("Campo 11");
-    tabuleiro.inserirNoFim("Campo 12");
+    tabuleiro.inserirNoFim(new Imovel("Casa de teste", 100.00, 10.00, 1.0));
+
+    /*
+    tabuleiro.inserirNoFim(new Imovel("Chalé da Serra Gaúcha", 200000.00, 1000.00, 1.0));
+    tabuleiro.inserirNoFim(new Imovel("Flat Paulista", 350000.00, 1750.00, 1.0));
+    tabuleiro.inserirNoFim(new Imovel("Sobrado de Ouro Preto", 400000.00, 2000.00, 1.0));
+    tabuleiro.inserirNoFim(new Imovel("Pousada do Pantanal", 500000.00, 2500.00, 1.0));
+    tabuleiro.inserirNoFim(new Imovel("Mansão de Gramado", 600000.00, 3000.00, 1.0));
+    tabuleiro.inserirNoFim(new Imovel("Cobertura de Florianópolis", 750000.00, 3750.00, 1.0));
+    tabuleiro.inserirNoFim(new Imovel("Fazenda do Cerrado", 280000.00, 1400.00, 1.0));
+    tabuleiro.inserirNoFim(new Imovel("Bangalô de Búzios", 450000.00, 2250.00, 1.0));
+    tabuleiro.inserirNoFim(new Imovel("Penthouse de Salvador", 850000.00, 4250.00, 1.0));
+    tabuleiro.inserirNoFim(new Imovel("Casa de Bonito", 220000.00, 1100.00, 1.0));
+    tabuleiro.inserirNoFim(new Imovel("Palacete de Petrópolis", 1000000.00, 5000.00, 1.0));
+     */
 
     int qtdJogadores = jogo.jogadores.size();
     int ordemAtual = 0;
@@ -57,8 +64,14 @@ void main() {
 
         switch (escolha) {
             case 1:
-                int valorRoll = tabuleiro.moverJogador(jogadorAtual);
+                int valorRoll = tabuleiro.moverJogador(jogadorAtual, true);
                 System.out.println(jogadorAtual.getNome() + " Andou " + valorRoll + " casas!");
+
+                TipoCasa parouEm = (TipoCasa) jogadorAtual.getPosAtual().elemento;
+
+                if(!(parouEm instanceof Inicio)){
+                    parouEm.acao(jogadorAtual);
+                }
                 break;
 
             default:

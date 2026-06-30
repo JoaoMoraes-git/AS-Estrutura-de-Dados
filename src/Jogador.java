@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Jogador {
@@ -12,12 +13,16 @@ public class Jogador {
         this.saldo = saldo;
         this.posAtual = posAtual;
         this.profissao = profissao;
+
+        this.propriedades = new ArrayList<>();
     }
 
     public Jogador(String nome, Profissao profissao, double saldo) {
         this.nome = nome;
         this.profissao = profissao;
         this.saldo = saldo;
+
+        this.propriedades = new ArrayList<>();
     }
 
     public String getNome() {
