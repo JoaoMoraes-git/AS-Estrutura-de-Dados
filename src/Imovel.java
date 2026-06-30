@@ -80,4 +80,44 @@ public class Imovel implements TipoCasa{
     public void perdeuDono(){
         this.dono = null;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public Double getAluguelBase() {
+        return aluguelBase;
+    }
+
+    public void setAluguelBase(Double aluguelBase) {
+        this.aluguelBase = aluguelBase;
+    }
+
+    public Jogador getDono() {
+        return dono;
+    }
+
+    public void setDono(Jogador dono) {
+        this.dono = dono;
+    }
+
+    public Double getMultiplicador() {
+        return multiplicador;
+    }
+
+    public void setMultiplicador(Double multiplicador) {
+        this.multiplicador = multiplicador;
+    }
 }

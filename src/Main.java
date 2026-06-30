@@ -12,19 +12,22 @@ void main() {
     PilhaCarta baralho = new PilhaCarta();
     baralho.gerarBaralho();
 
-    Profissao profEspeculador = new Profissao("Especulador", 1.2, 1.1, 1.0, 1.0);
-    Profissao profNegociante = new Profissao("Negociante", 1.0, 1.0, 0.9, 1.0);
-    Profissao profAdvogado = new Profissao("Advogado", 1.0, 0.0, 1.0, 1.0);
-    Profissao profConstrutor = new Profissao("Construtor", 1.0, 1.0, 1.0, 1.15);
+//    Profissao profEspeculador = new Profissao("Especulador", 1.2, 1.1, 1.0, 1.0);
+//    Profissao profNegociante = new Profissao("Negociante", 1.0, 1.0, 0.9, 1.0);
+//    Profissao profAdvogado = new Profissao("Advogado", 1.0, 0.0, 1.0, 1.0);
+//    Profissao profConstrutor = new Profissao("Construtor", 1.0, 1.0, 1.0, 1.15);
 
-    Jogador j1 = new Jogador("Player 1", profissao, 2500.00);
-    Jogador j2 = new Jogador("Player 2", profissao, 2500.00);
-    Jogador j3 = new Jogador("Player 3", profissao, 2500.00);
-    Jogador j4 = new Jogador("Player 4", profissao, 2500.00);
+    // Substitua este bloco de jogadores no seu código:
+//    Jogador j1 = new Jogador("Eze Peculador", profEspeculador, 2500.00);
+//    Jogador j2 = new Jogador("Shopi Kepp", profNegociante, 2500.00);
+//    Jogador j3 = new Jogador("Fênix Veríssimo", profAdvogado, 2500.00);
+//    Jogador j4 = new Jogador("Leo Go", profConstrutor, 2500.00);
+//
+//    jogo.jogadores.add(j1);
+//    jogo.jogadores.add(j2);
+//    jogo.jogadores.add(j3);
+//    jogo.jogadores.add(j4);
 
-    jogo.jogadores.add(j1);
-    jogo.jogadores.add(j2);
-    jogo.jogadores.add(j3);
     System.out.println(jogo.jogadores.get(0));
 
     // Salário balanceado para R$ 1.000,00
