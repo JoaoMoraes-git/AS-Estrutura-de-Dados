@@ -13,29 +13,26 @@ public class Configuracoes {
     private String tempNome;
     private double tempPreco;
     private double tempAluguel;
+    private String tempNomeJ;
+    private int tempProfissao;
 
     Scanner input = new Scanner(System.in);
 
+    Profissao profEspeculador = new Profissao("Especulador", 1.2, 1.1, 1.0, 1.0);
+    Profissao profNegociante = new Profissao("Negociante", 1.0, 1.0, 0.9, 1.0);
+    Profissao profAdvogado = new Profissao("Advogado", 1.0, 0.0, 1.0, 1.0);
+    Profissao profConstrutor = new Profissao("Construtor", 1.0, 1.0, 1.0, 1.15);
 
-    //Roda sempre na main por padrão, depois o usuário pode mexer
-    private void configPadrao(){
+    public Configuracoes() {
+        configPadrao();
+    }
 
-        Profissao profEspeculador = new Profissao("Especulador", 1.2, 1.1, 1.0, 1.0);
-        Profissao profNegociante = new Profissao("Negociante", 1.0, 1.0, 0.9, 1.0);
-        Profissao profAdvogado = new Profissao("Advogado", 1.0, 0.0, 1.0, 1.0);
-        Profissao profConstrutor = new Profissao("Construtor", 1.0, 1.0, 1.0, 1.15);
+    private void configPadrao() {
+        jogadoresCadastrados.add(new Jogador("Eze Peculador", profEspeculador, saldoInicial));
+        jogadoresCadastrados.add(new Jogador("Shopi Kepp", profNegociante, saldoInicial));
+        jogadoresCadastrados.add(new Jogador("Fênix Veríssimo", profAdvogado, saldoInicial));
+        jogadoresCadastrados.add(new Jogador("Leo Go", profConstrutor, saldoInicial));
 
-        Jogador j1 = new Jogador("Eze Peculador", profEspeculador, 2500.00);
-        Jogador j2 = new Jogador("Shopi Kepp", profNegociante, 2500.00);
-        Jogador j3 = new Jogador("Fênix Veríssimo", profAdvogado, 2500.00);
-        Jogador j4 = new Jogador("Leo Go", profConstrutor, 2500.00);
-
-        jogadoresCadastrados.add(new Jogador("Eze Peculador", profEspeculador, 2500.00));
-        jogadoresCadastrados.add(new Jogador("Shopi Kepp", profNegociante, 2500.00));
-        jogadoresCadastrados.add(new Jogador("Fênix Veríssimo", profAdvogado, 2500.00));
-        jogadoresCadastrados.add(new Jogador("Leo Go", profConstrutor, 2500.00));
-
-        //TROCAR PARA AS PROPRIEDADES ATUAIS
         imoveisCadastrados.add(new Imovel("Chalé da Serra Gaúcha", 400.00, 50.00, 1.0));
         imoveisCadastrados.add(new Imovel("Flat Paulista", 600.00, 80.00, 1.0));
         imoveisCadastrados.add(new Imovel("Sobrado de Ouro Preto", 800.00, 100.00, 1.0));
@@ -49,103 +46,223 @@ public class Configuracoes {
         imoveisCadastrados.add(new Imovel("Palacete de Petrópolis", 3500.00, 800.00, 1.0));
     }
 
-    public void configurar(){
+    public void configurar() {
         boolean configurando = true;
-        System.out.println("--CONFIGURAÇÕES INICIAIS--");
         int escolha;
 
-        while(configurando){
-            System.out.println("1. Propriedades\n2. Jogadores\n3. Partida");
+        while (configurando) {
+            System.out.println("\n-- CONFIGURAÇÕES PRÉ-JOGO --");
+            System.out.println("1. Gerenciar Imóveis (" + imoveisCadastrados.size() + "/40)");
+            System.out.println("2. Gerenciar Jogadores (" + jogadoresCadastrados.size() + "/6)");
+            System.out.println("3. Configurações da Partida");
+            System.out.println("4. INICIAR PARTIDA");
+            System.out.print("Escolha: ");
             escolha = input.nextInt();
 
-            switch (escolha){
+            switch (escolha) {
+
                 case 1:
-                    for (int i = 0; i < imoveisCadastrados.size(); i++){
-                        System.out.println("PRINTAR TODO O ARRAY AQUI JUNTO COM O SEU ÍNDICE"); //////////////////////////////
+                    System.out.println("\n1. Cadastrar imóvel\n2. Listar imóveis\n3. Atualizar imóvel\n4. Remover imóvel");
+                    escolha = input.nextInt();
 
-                        System.out.println("1. Cadastrar imóvel novo\n2. Atualizar imóvel\n3. Remover imóvel");
-                        escolha = input.nextInt();
-
-                        switch (escolha) {
-                            case 1:
-                                if (imoveisCadastrados.size() >= 40){
-                                    System.out.println("! Máximo de imóveis já cadastrados");
-                                } else {
-                                    System.out.println("-Cadastrando novo imóvel-");
+                    switch (escolha) {
+                        case 1:
+                            if (imoveisCadastrados.size() >= 40) {
+                                System.out.println("! Máximo de 40 imóveis já cadastrados.");
+                            } else {
+                                System.out.println("- Cadastrando novo imóvel -");
+                                camposImovel();
+                                imoveisCadastrados.add(new Imovel(tempNome, tempPreco, tempAluguel, 1.0));
+                                System.out.println("CADASTRADO COM SUCESSO!");
+                            }
+                            break;
+                        case 2:
+                            System.out.println("- Lista de Imóveis -");
+                            for (int i = 0; i < imoveisCadastrados.size(); i++) {
+                                System.out.println("[" + i + "] " + imoveisCadastrados.get(i).toString());
+                            }
+                            break;
+                        case 3:
+                            if (imoveisCadastrados.size() == 0) {
+                                System.out.println("! Nenhum imóvel cadastrado.");
+                            } else {
+                                System.out.print("Digite o índice do imóvel para atualizar: ");
+                                int indice = input.nextInt();
+                                if (indice >= 0 && indice < imoveisCadastrados.size()) {
                                     camposImovel();
-                                    imoveisCadastrados.add(new Imovel(tempNome, tempPreco, tempAluguel, 1.0));
-                                    System.out.println("CADASTRADO COM SUCESSO");
-                                    break;
-                                }
-
-                            case 2:
-                                if (imoveisCadastrados.size() >= 0) {
-                                    System.out.println("! Sem nenhum imóvel no momento para atualizar");
+                                    imoveisCadastrados.set(indice, new Imovel(tempNome, tempPreco, tempAluguel, 1.0));
+                                    System.out.println("ATUALIZADO COM SUCESSO!");
                                 } else {
-                                    System.out.println("-Atualizando imóvel-");
-                                    System.out.println("Digite o índice do imóvel");
-                                    int indice = input.nextInt();
-                                    if (indice >= 0 && indice <= imoveisCadastrados.size() - 1){
-                                        camposImovel();
-                                        Imovel imovel = imoveisCadastrados.get(indice);
-                                        imovel.setNome (tempNome);
-                                        imovel.setPreco(tempPreco);
-                                        imovel.setAluguelBase(tempAluguel);
-                                        System.out.println("ATUALIZADO COM SUCESSO");
-
-                                    } else {
-                                        System.out.println("Índice não encontrado");
-                                    }
+                                    System.out.println("Índice não encontrado.");
                                 }
-
-                            case 3:
-                                if (imoveisCadastrados.size() >= 0) {
-                                    System.out.println("! Sem nenhum imóvel no momento para remover");
+                            }
+                            break;
+                        case 4:
+                            if (imoveisCadastrados.size() == 0) {
+                                System.out.println("! Nenhum imóvel cadastrado.");
+                            } else {
+                                System.out.print("Digite o índice do imóvel para remover: ");
+                                int indice = input.nextInt();
+                                if (indice >= 0 && indice < imoveisCadastrados.size()) {
+                                    imoveisCadastrados.remove(indice);
+                                    System.out.println("REMOVIDO COM SUCESSO!");
                                 } else {
-                                    System.out.println("-Removendo imóvel");
-                                    System.out.println("Digite o índice do imóvel");
-                                    int indice = input.nextInt();
-                                    if (indice >= 0 && indice <= imoveisCadastrados.size() - 1){
-                                        imoveisCadastrados.remove(indice);
-                                        System.out.println("REMOVIDO COM SUCESSO");
-
-                                    } else {
-                                        System.out.println("Índice não encontrado");
-                                    }
+                                    System.out.println("Índice não encontrado.");
                                 }
-                                break;
-
-                            default:
-                                System.out.println("Opção inválida");
-                                break;
-                        }
-
+                            }
+                            break;
+                        default:
+                            System.out.println("Opção inválida.");
+                            break;
                     }
                     break;
 
                 case 2:
-                    System.out.println("PLACEHOLDER");
+                    System.out.println("\n1. Cadastrar jogador\n2. Listar jogadores\n3. Atualizar jogador\n4. Remover jogador");
+                    escolha = input.nextInt();
+
+                    switch (escolha) {
+                        case 1:
+                            if (jogadoresCadastrados.size() >= 6) {
+                                System.out.println("! Máximo de 6 jogadores já cadastrados.");
+                            } else {
+                                System.out.println("- Cadastrando novo jogador -");
+                                campoJogador();
+                                adicionarJogadorNaLista(tempProfissao);
+                            }
+                            break;
+                        case 2:
+                            System.out.println("- Lista de Jogadores -");
+                            for (int i = 0; i < jogadoresCadastrados.size(); i++) {
+                                Jogador j = jogadoresCadastrados.get(i);
+                                System.out.println("[" + i + "] " + j.getNome() + " | Profissão: " + j.getProfissao().getTitulo());
+                            }
+                            break;
+                        case 3:
+                            if (jogadoresCadastrados.size() == 0) {
+                                System.out.println("! Nenhum jogador cadastrado.");
+                            } else {
+                                System.out.print("Digite o índice do jogador para atualizar: ");
+                                int indice = input.nextInt();
+                                if (indice >= 0 && indice < jogadoresCadastrados.size()) {
+                                    campoJogador();
+                                    atualizarJogadorNaLista(indice, tempProfissao);
+                                } else {
+                                    System.out.println("Índice não encontrado.");
+                                }
+                            }
+                            break;
+                        case 4:
+                            if (jogadoresCadastrados.size() == 0) {
+                                System.out.println("! Nenhum jogador cadastrado.");
+                            } else {
+                                System.out.print("Digite o índice do jogador para remover: ");
+                                int indice = input.nextInt();
+                                if (indice >= 0 && indice < jogadoresCadastrados.size()) {
+                                    jogadoresCadastrados.remove(indice);
+                                    System.out.println("REMOVIDO COM SUCESSO!");
+                                } else {
+                                    System.out.println("Índice não encontrado.");
+                                }
+                            }
+                            break;
+                        default:
+                            System.out.println("Opção inválida.");
+                            break;
+                    }
                     break;
 
                 case 3:
-                    System.out.println("PLACEHOLDER");
+                    System.out.println("\n-- REGRAS DA PARTIDA --");
+                    System.out.println("1. Alterar Saldo Inicial (Atual: R$" + saldoInicial + ")");
+                    System.out.println("2. Alterar Salário Base (Atual: R$" + salarioBase + ")");
+                    System.out.println("3. Alterar Número de Turnos (Atual: " + turnos + ")");
+                    escolha = input.nextInt();
+
+                    switch (escolha) {
+                        case 1:
+                            System.out.print("Novo saldo inicial: R$");
+                            saldoInicial = input.nextDouble();
+
+                            // CORREÇÃO: Atualiza o saldo de todos os jogadores que já estão na lista
+                            for (Jogador j : jogadoresCadastrados) {
+                                j.saldo = saldoInicial;
+                            }
+                            System.out.println("Saldo inicial atualizado para todos os jogadores!");
+                            break;
+                        case 2:
+                            System.out.print("Novo salário base: R$");
+                            salarioBase = input.nextDouble();
+                            break;
+                        case 3:
+                            System.out.print("Novo número de turnos: ");
+                            turnos = input.nextInt();
+                            break;
+                        default:
+                            System.out.println("Opção inválida.");
+                    }
+                    break;
+
+                case 4:
+                    if (jogadoresCadastrados.size() < 2) {
+                        System.out.println("ERRO: É necessário no mínimo 2 jogadores para iniciar.");
+                    } else if (imoveisCadastrados.size() < 10) {
+                        System.out.println("ERRO: É necessário no mínimo 10 imóveis cadastrados para iniciar.");
+                    } else {
+                        System.out.println("\n>>> Tudo pronto! Iniciando a partida... <<<");
+                        configurando = false;
+                    }
                     break;
 
                 default:
-                    System.out.println("Opção inválida");
+                    System.out.println("Opção inválida.");
                     break;
             }
-
         }
     }
 
-    public void camposImovel(){
-        System.out.println("Digite o título do imóvel");
+    public void camposImovel() {
+        input.nextLine(); // Limpa o buffer
+        System.out.println("Digite o título do imóvel:");
         tempNome = input.nextLine();
-        System.out.println("Digite o preço do imóvel");
+        System.out.println("Digite o preço do imóvel:");
         tempPreco = input.nextDouble();
-        System.out.println("Digite o novo aluguel base do imóvel");
+        System.out.println("Digite o novo aluguel base do imóvel:");
         tempAluguel = input.nextDouble();
     }
 
+    public void campoJogador() {
+        input.nextLine(); // Limpa o buffer
+        System.out.println("Digite o nome do jogador:");
+        tempNomeJ = input.nextLine();
+        System.out.println("Qual profissão? 1. Especulador | 2. Negociante | 3. Advogado | 4. Construtor");
+        tempProfissao = input.nextInt();
+    }
+
+    private void adicionarJogadorNaLista(int prof) {
+        switch (prof) {
+            case 1: jogadoresCadastrados.add(new Jogador(tempNomeJ, profEspeculador, saldoInicial)); break;
+            case 2: jogadoresCadastrados.add(new Jogador(tempNomeJ, profNegociante, saldoInicial)); break;
+            case 3: jogadoresCadastrados.add(new Jogador(tempNomeJ, profAdvogado, saldoInicial)); break;
+            case 4: jogadoresCadastrados.add(new Jogador(tempNomeJ, profConstrutor, saldoInicial)); break;
+            default: System.out.println("Profissão inválida. Jogador não cadastrado."); return;
+        }
+        System.out.println("JOGADOR CADASTRADO!");
+    }
+
+    private void atualizarJogadorNaLista(int indice, int prof) {
+        switch (prof) {
+            case 1: jogadoresCadastrados.set(indice, new Jogador(tempNomeJ, profEspeculador, saldoInicial)); break;
+            case 2: jogadoresCadastrados.set(indice, new Jogador(tempNomeJ, profNegociante, saldoInicial)); break;
+            case 3: jogadoresCadastrados.set(indice, new Jogador(tempNomeJ, profAdvogado, saldoInicial)); break;
+            case 4: jogadoresCadastrados.set(indice, new Jogador(tempNomeJ, profConstrutor, saldoInicial)); break;
+            default: System.out.println("Profissão inválida. Jogador não atualizado."); return;
+        }
+        System.out.println("ATUALIZADO COM SUCESSO!");
+    }
+
+    public ArrayList<Jogador> getJogadoresCadastrados() { return jogadoresCadastrados; }
+    public ArrayList<Imovel> getImoveisCadastrados() { return imoveisCadastrados; }
+    public double getSalarioBase() { return salarioBase; }
+    public int getTurnos() { return turnos; }
 }
