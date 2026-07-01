@@ -188,7 +188,7 @@ public class Configuracoes {
                             saldoInicial = input.nextDouble();
 
                             for (Jogador j : jogadoresCadastrados) {
-                                j.saldo = saldoInicial;
+                                j.setSaldo(saldoInicial);
                             }
                             System.out.println("Saldo inicial atualizado para todos os jogadores!");
                             break;

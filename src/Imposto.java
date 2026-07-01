@@ -6,11 +6,11 @@ public class Imposto implements TipoCasa {
         for (Imovel imovel : jogador.getPropriedades()) {
             valorImoveis += imovel.getPreco();
         }
-        double patrimonioTotal = jogador.saldo + valorImoveis;
+        double patrimonioTotal = jogador.getSaldo() + valorImoveis;
         double valorImposto = patrimonioTotal * 0.05;
         double impostoCobrado = valorImposto * jogador.getProfissao().getMultiImposto();
 
-        jogador.saldo -= impostoCobrado;
+        jogador.removerSaldo(impostoCobrado);
 
         System.out.println(jogador.getNome() + " caiu na casa de impostos e pagou R$" + String.format("%.2f", impostoCobrado));
     }

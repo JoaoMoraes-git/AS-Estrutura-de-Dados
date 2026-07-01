@@ -19,11 +19,11 @@ public class CartaEfeito implements TipoCasa{
         switch (cartaPega.getTipo()){
 
             case 1:
-                jogador.saldo += cartaPega.getValor();
+                jogador.adicionarSaldo(cartaPega.getValor());
                 break;
 
             case 2:
-                jogador.saldo -= cartaPega.getValor();
+                jogador.removerSaldo(cartaPega.getValor());
                 break;
 
             case 3:
@@ -52,8 +52,8 @@ public class CartaEfeito implements TipoCasa{
                 double valorPagar = cartaPega.getValor();
                 for (Jogador outro : jogo.jogadores) {
                     if (outro != jogador) {
-                        jogador.saldo -= valorPagar;
-                        outro.saldo += valorPagar;
+                        jogador.removerSaldo(valorPagar);
+                        outro.adicionarSaldo(valorPagar);
                     }
                 }
                 break;
@@ -62,8 +62,8 @@ public class CartaEfeito implements TipoCasa{
                 double valorReceber = cartaPega.getValor();
                 for (Jogador outro : jogo.jogadores){
                     if (outro != jogador) {
-                        outro.saldo -= valorReceber;
-                        jogador.saldo += valorReceber;
+                        outro.removerSaldo(valorReceber);
+                        jogador.adicionarSaldo(valorReceber);
                     }
                 }
                 break;

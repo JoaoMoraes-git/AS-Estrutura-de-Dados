@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        //Preparando o essencial
+        // Preparando o essencial
         Scanner input = new Scanner(System.in);
 
         Configuracoes config = new Configuracoes();
@@ -25,7 +25,7 @@ public class Main {
 
         ArrayList<Imovel> imoveis = config.getImoveisCadastrados();
 
-        //Geração de tabuleiro
+        // Geração de tabuleiro
         for (int i = 0; i < imoveis.size(); i++) {
             tabuleiro.inserirNoFim(imoveis.get(i));
 
@@ -38,7 +38,7 @@ public class Main {
             }
         }
 
-        //Configurações pré-partida
+        // Configurações pré-partida
         int qtdJogadores = jogo.jogadores.size();
         int ordemAtual = 0;
 
@@ -50,7 +50,7 @@ public class Main {
             break;
         }
 
-        //Menu de jogo
+        // Menu de jogo
         int turnosRestantes = config.getTurnos();
 
         while (turnosRestantes > 0) {
@@ -60,7 +60,7 @@ public class Main {
             System.out.println("-- Turnos restantes: " + turnosRestantes + " --");
             System.out.println(
                     "Vez de: " + jogadorAtual.getNome() + " | Profissão: " + jogadorAtual.getProfissao().getTitulo());
-            System.out.println("Saldo Atual: R$ " + String.format("%.2f", jogadorAtual.saldo));
+            System.out.println("Saldo Atual: R$ " + String.format("%.2f", jogadorAtual.getSaldo()));
             System.out.println("Posição Atual: " + jogadorAtual.getPosAtual().elemento);
 
             System.out.print("Propriedades: ");
@@ -76,11 +76,14 @@ public class Main {
             }
             System.out.println("\n=============================================");
 
+            System.out.println("Tabuleiro atual:");
+            tabuleiro.imprimir();
+            System.out.println("=============================================");
+
             System.out.print("Digite qualquer tecla e pressione ENTER para rolar os dados: ");
             input.next();
 
             int valorRoll = tabuleiro.moverJogador(jogadorAtual, true);
-            System.out.println(jogadorAtual.getNome() + " andou " + valorRoll + " casas!");
 
             TipoCasa parouEm = (TipoCasa) jogadorAtual.getPosAtual().elemento;
 
@@ -88,7 +91,7 @@ public class Main {
                 parouEm.acao(jogadorAtual);
             }
 
-            if (jogadorAtual.saldo < 0) {
+            if (jogadorAtual.getSaldo() < 0) {
                 System.out.println(
                         "!!! FALÊNCIA !!! O jogador " + jogadorAtual.getNome() + " faliu e está fora da partida!");
 
@@ -117,7 +120,7 @@ public class Main {
             }
         }
 
-        //Relatório de fim de partida
+        // Relatório de fim de partida
         System.out.println("\n==================================");
         System.out.println("======= RELATÓRIO FINAL ========");
         System.out.println("==================================");
@@ -144,8 +147,9 @@ public class Main {
 
         for (int i = 0; i < jogo.jogadores.size() - 1; i++) {
             for (int j = 0; j < jogo.jogadores.size() - 1 - i; j++) {
-                double patrimonioA = jogo.jogadores.get(j).saldo + calcularValorImoveis(jogo.jogadores.get(j), imoveis);
-                double patrimonioB = jogo.jogadores.get(j + 1).saldo
+                double patrimonioA = jogo.jogadores.get(j).getSaldo()
+                        + calcularValorImoveis(jogo.jogadores.get(j), imoveis);
+                double patrimonioB = jogo.jogadores.get(j + 1).getSaldo()
                         + calcularValorImoveis(jogo.jogadores.get(j + 1), imoveis);
 
                 if (patrimonioA < patrimonioB) {
@@ -158,11 +162,11 @@ public class Main {
 
         for (int i = 0; i < jogo.jogadores.size(); i++) {
             Jogador j = jogo.jogadores.get(i);
-            double patrimonioTotal = j.saldo + calcularValorImoveis(j, imoveis);
+            double patrimonioTotal = j.getSaldo() + calcularValorImoveis(j, imoveis);
 
             System.out.println((i + 1) + "º Lugar: " + j.getNome() + " (" + j.getProfissao().getTitulo() + ")");
             System.out.println("   Patrimônio Total: R$" + String.format("%.2f", patrimonioTotal) + " (Saldo: R$"
-                    + String.format("%.2f", j.saldo) + ")");
+                    + String.format("%.2f", j.getSaldo()) + ")");
             System.out.println("   Voltas completadas: " + j.getVoltasCompletas());
             System.out.println("----------------------------------");
         }

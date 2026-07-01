@@ -36,9 +36,9 @@ public class Imovel implements TipoCasa{
 
             switch (escolha){
                 case "s":
-                    if (jogador.saldo >= this.preco){
+                    if (jogador.getSaldo() >= this.preco){
                         System.out.println("Imóvel adquirido");
-                        jogador.saldo -= preco;
+                        jogador.removerSaldo(preco);
                         this.dono = jogador;
                         this.dono.getPropriedades().add(this);
                     } else {
@@ -63,8 +63,8 @@ public class Imovel implements TipoCasa{
             double pagarAluguel = aluguelAtual * jogador.getProfissao().getMultiAluguelPago() * dono.getProfissao().getMultiAluguelRecebido();
 
             System.out.println("A propriedade " + this.nome + " pertence a " + dono.getNome() + ", você pagou o aluguel de R$" + String.format("%.2f", pagarAluguel));
-            jogador.saldo -= pagarAluguel;
-            dono.saldo += pagarAluguel;
+            jogador.removerSaldo(pagarAluguel);
+            dono.adicionarSaldo(pagarAluguel);
         }
 
         //Acréscimo de aluguel

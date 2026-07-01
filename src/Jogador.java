@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Jogador {
     private String nome;
-    public double saldo;
+    private double saldo;
     private Casa posAtual;
     private List<Imovel> propriedades;
     private Profissao profissao;
@@ -48,7 +48,19 @@ public class Jogador {
     }
 
     public void setSaldo(double saldo) {
-        this.saldo = saldo;
+        if (this.saldo != saldo) {
+            double saldoAntigo = this.saldo;
+            this.saldo = saldo;
+            System.out.printf("O saldo de %s mudou de R$ %.2f para R$ %.2f\n", this.nome, saldoAntigo, this.saldo);
+        }
+    }
+
+    public void adicionarSaldo(double valor) {
+        setSaldo(this.saldo + valor);
+    }
+
+    public void removerSaldo(double valor) {
+        setSaldo(this.saldo - valor);
     }
 
     public Casa getPosAtual() {
@@ -77,7 +89,7 @@ public class Jogador {
 
     @Override
     public String toString() {
-        return "Turno de: " + nome + " | Saldo: " + saldo;
+        return "Turno de: " + nome + " | Saldo: " + String.format("%.2f", saldo);
     }
 
 }

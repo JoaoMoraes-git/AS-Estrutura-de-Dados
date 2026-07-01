@@ -107,8 +107,11 @@ public class Tabuleiro<T> {
         if (inicio == null) return;
         Casa<T> atual = inicio;
         do {
-            System.out.print(atual.elemento + " ");
+            System.out.print(atual.elemento);
             atual = atual.proximo;
+            if (atual != inicio) {
+                System.out.print(" / ");
+            }
         } while (atual != inicio);
         System.out.println();
     }
