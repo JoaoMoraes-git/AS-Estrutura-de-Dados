@@ -5,6 +5,5 @@ public class Casa<T> {
     String tipo;
     public Casa(T elemento){
         this.elemento = elemento;
-        this.tipo = tipo;
     }
 }

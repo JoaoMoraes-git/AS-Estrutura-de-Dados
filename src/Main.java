@@ -32,7 +32,7 @@ public class Main {
             } else if (i == 2) {
                 tabuleiro.inserirNoFim(new Imposto());
             } else if (i == 3) {
-                tabuleiro.inserirNoFim(new Restituicao());
+                tabuleiro.inserirNoFim(new Restituicao(config.getSalarioBase()));
             }
         }
 
@@ -55,7 +55,8 @@ public class Main {
             // --- PAINEL DE INFORMAÇÕES DO JOGADOR ---
             System.out.println("\n=============================================");
             System.out.println("-- Turnos restantes: " + turnosRestantes + " --");
-            System.out.println("Vez de: " + jogadorAtual.getNome() + " | Profissão: " + jogadorAtual.getProfissao().getTitulo());
+            System.out.println(
+                    "Vez de: " + jogadorAtual.getNome() + " | Profissão: " + jogadorAtual.getProfissao().getTitulo());
             System.out.println("Saldo Atual: R$ " + String.format("%.2f", jogadorAtual.saldo));
             System.out.println("Posição Atual: " + jogadorAtual.getPosAtual().elemento);
 
@@ -81,13 +82,14 @@ public class Main {
 
             TipoCasa parouEm = (TipoCasa) jogadorAtual.getPosAtual().elemento;
 
-            if(!(parouEm instanceof Inicio)){
+            if (!(parouEm instanceof Inicio)) {
                 parouEm.acao(jogadorAtual);
             }
 
             // --- CHECAGEM DE FALÊNCIA ---
             if (jogadorAtual.saldo < 0) {
-                System.out.println("!!! FALÊNCIA !!! O jogador " + jogadorAtual.getNome() + " faliu e está fora da partida!");
+                System.out.println(
+                        "!!! FALÊNCIA !!! O jogador " + jogadorAtual.getNome() + " faliu e está fora da partida!");
 
                 for (Imovel imovel : imoveis) {
                     if (imovel.getDono() != null && imovel.getDono().equals(jogadorAtual)) {
@@ -145,7 +147,8 @@ public class Main {
         for (int i = 0; i < jogo.jogadores.size() - 1; i++) {
             for (int j = 0; j < jogo.jogadores.size() - 1 - i; j++) {
                 double patrimonioA = jogo.jogadores.get(j).saldo + calcularValorImoveis(jogo.jogadores.get(j), imoveis);
-                double patrimonioB = jogo.jogadores.get(j + 1).saldo + calcularValorImoveis(jogo.jogadores.get(j + 1), imoveis);
+                double patrimonioB = jogo.jogadores.get(j + 1).saldo
+                        + calcularValorImoveis(jogo.jogadores.get(j + 1), imoveis);
 
                 if (patrimonioA < patrimonioB) {
                     Jogador temp = jogo.jogadores.get(j);
@@ -160,7 +163,8 @@ public class Main {
             double patrimonioTotal = j.saldo + calcularValorImoveis(j, imoveis);
 
             System.out.println((i + 1) + "º Lugar: " + j.getNome() + " (" + j.getProfissao().getTitulo() + ")");
-            System.out.println("   Patrimônio Total: R$" + String.format("%.2f", patrimonioTotal) + " (Saldo: R$" + String.format("%.2f", j.saldo) + ")");
+            System.out.println("   Patrimônio Total: R$" + String.format("%.2f", patrimonioTotal) + " (Saldo: R$"
+                    + String.format("%.2f", j.saldo) + ")");
             System.out.println("   Voltas completadas: " + j.getVoltasCompletas());
             System.out.println("----------------------------------");
         }

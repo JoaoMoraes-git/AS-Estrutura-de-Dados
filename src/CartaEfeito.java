@@ -13,28 +13,28 @@ public class CartaEfeito implements TipoCasa{
     public void acao(Jogador jogador) {
         System.out.println("#Casa de sorte ou azar");
 
-        Carta cartePega = baralho.pegarCarta();
-        System.out.println(jogador.getNome() + " pegou a carta: " + cartePega.getDescricao());
+        Carta cartaPega = baralho.pegarCarta();
+        System.out.println(jogador.getNome() + " pegou a carta: " + cartaPega.getDescricao());
 
-        switch (cartePega.getTipo()){
+        switch (cartaPega.getTipo()){
 
             case 1:
-                jogador.saldo += cartePega.getValor();
+                jogador.saldo += cartaPega.getValor();
                 break;
 
             case 2:
-                jogador.saldo -= cartePega.getValor();
+                jogador.saldo -= cartaPega.getValor();
                 break;
 
             case 3:
-                tabuleiro.moverJogador(jogador, cartePega.getValor(), true);
+                tabuleiro.moverJogador(jogador, cartaPega.getValor(), true);
 
                 TipoCasa novaCasa = (TipoCasa) jogador.getPosAtual().elemento;
                 if (!(novaCasa instanceof Inicio)) novaCasa.acao(jogador);
                 break;
 
             case 4:
-                tabuleiro.moverJogador(jogador, cartePega.getValor(), false);
+                tabuleiro.moverJogador(jogador, cartaPega.getValor(), false);
 
                 TipoCasa casaRetorno = (TipoCasa) jogador.getPosAtual().elemento;
                 if (!(casaRetorno instanceof Inicio)) casaRetorno.acao(jogador);
@@ -49,7 +49,7 @@ public class CartaEfeito implements TipoCasa{
                 break;
 
             case 7:
-                double valorPagar = cartePega.getValor();
+                double valorPagar = cartaPega.getValor();
                 for (Jogador outro : jogo.jogadores) {
                     if (outro != jogador) {
                         jogador.saldo -= valorPagar;
@@ -59,7 +59,7 @@ public class CartaEfeito implements TipoCasa{
                 break;
 
             case 8:
-                double valorReceber = cartePega.getValor();
+                double valorReceber = cartaPega.getValor();
                 for (Jogador outro : jogo.jogadores){
                     if (outro != jogador) {
                         outro.saldo -= valorReceber;

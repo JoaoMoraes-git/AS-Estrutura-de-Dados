@@ -62,7 +62,7 @@ public class Imovel implements TipoCasa{
         else {
             double pagarAluguel = aluguelAtual * jogador.getProfissao().getMultiAluguelPago() * dono.getProfissao().getMultiAluguelRecebido();
 
-            System.out.println("A propriedade " + this.nome + " percentece a " + dono.getNome() + ", você pagou o aluguel de R$" + aluguelAtual);
+            System.out.println("A propriedade " + this.nome + " pertence a " + dono.getNome() + ", você pagou o aluguel de R$" + String.format("%.2f", pagarAluguel));
             jogador.saldo -= pagarAluguel;
             dono.saldo += pagarAluguel;
         }

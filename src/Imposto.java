@@ -2,11 +2,17 @@ public class Imposto implements TipoCasa {
 
     @Override
     public void acao(Jogador jogador) {
-        double valorImposto = jogador.saldo * 0.05;
+        double valorImoveis = 0;
+        for (Imovel imovel : jogador.getPropriedades()) {
+            valorImoveis += imovel.getPreco();
+        }
+        double patrimonioTotal = jogador.saldo + valorImoveis;
+        double valorImposto = patrimonioTotal * 0.05;
+        double impostoCobrado = valorImposto * jogador.getProfissao().getMultiImposto();
 
-        jogador.saldo -= valorImposto * jogador.getProfissao().getMultiImposto();
+        jogador.saldo -= impostoCobrado;
 
-        System.out.println(jogador.getNome() + " caiu na casa de impostos e pagou " + valorImposto);
+        System.out.println(jogador.getNome() + " caiu na casa de impostos e pagou R$" + String.format("%.2f", impostoCobrado));
     }
 
     @Override
