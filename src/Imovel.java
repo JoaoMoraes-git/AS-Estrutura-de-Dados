@@ -18,7 +18,7 @@ public class Imovel implements TipoCasa{
 
     @Override
     public String toString() {
-        return "Caiu no Imóvel: " + nome;
+        return nome;
 
     }
 

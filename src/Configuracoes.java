@@ -184,7 +184,6 @@ public class Configuracoes {
                             System.out.print("Novo saldo inicial: R$");
                             saldoInicial = input.nextDouble();
 
-                            // CORREÇÃO: Atualiza o saldo de todos os jogadores que já estão na lista
                             for (Jogador j : jogadoresCadastrados) {
                                 j.saldo = saldoInicial;
                             }
@@ -222,7 +221,7 @@ public class Configuracoes {
     }
 
     public void camposImovel() {
-        input.nextLine(); // Limpa o buffer
+        input.nextLine();
         System.out.println("Digite o título do imóvel:");
         tempNome = input.nextLine();
         System.out.println("Digite o preço do imóvel:");
@@ -232,7 +231,7 @@ public class Configuracoes {
     }
 
     public void campoJogador() {
-        input.nextLine(); // Limpa o buffer
+        input.nextLine();
         System.out.println("Digite o nome do jogador:");
         tempNomeJ = input.nextLine();
         System.out.println("Qual profissão? 1. Especulador | 2. Negociante | 3. Advogado | 4. Construtor");

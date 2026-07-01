@@ -9,6 +9,8 @@ public class Inicio implements TipoCasa{
     public void acao(Jogador jogador) {
         System.out.println(jogador.getNome() + " voltou ao início e recebeu o seu salário de R$" + this.salario);
         jogador.saldo += salario * jogador.getProfissao().getMultSalario();
+
+        jogador.adicionarVolta();
     }
 
     @Override

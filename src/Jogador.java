@@ -8,6 +8,8 @@ public class Jogador {
     private List<Imovel> propriedades;
     private Profissao profissao;
 
+    private int voltasCompletas = 0;
+
     public Jogador(String nome, double saldo, Casa posAtual, Profissao profissao) {
         this.nome = nome;
         this.saldo = saldo;
@@ -23,6 +25,14 @@ public class Jogador {
         this.saldo = saldo;
 
         this.propriedades = new ArrayList<>();
+    }
+
+    public int getVoltasCompletas() {
+        return voltasCompletas;
+    }
+
+    public void adicionarVolta() {
+        this.voltasCompletas++;
     }
 
     public String getNome() {
