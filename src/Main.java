@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        //Preparando o essencial
         Scanner input = new Scanner(System.in);
 
         Configuracoes config = new Configuracoes();
@@ -24,6 +25,7 @@ public class Main {
 
         ArrayList<Imovel> imoveis = config.getImoveisCadastrados();
 
+        //Geração de tabuleiro
         for (int i = 0; i < imoveis.size(); i++) {
             tabuleiro.inserirNoFim(imoveis.get(i));
 
@@ -36,6 +38,7 @@ public class Main {
             }
         }
 
+        //Configurações pré-partida
         int qtdJogadores = jogo.jogadores.size();
         int ordemAtual = 0;
 
@@ -47,6 +50,7 @@ public class Main {
             break;
         }
 
+        //Menu de jogo
         int turnosRestantes = config.getTurnos();
 
         while (turnosRestantes > 0) {
@@ -73,7 +77,7 @@ public class Main {
             System.out.println("\n=============================================");
 
             System.out.print("Digite qualquer tecla e pressione ENTER para rolar os dados: ");
-            input.next(); // Captura qualquer entrada do usuário para prosseguir
+            input.next();
 
             int valorRoll = tabuleiro.moverJogador(jogadorAtual, true);
             System.out.println(jogadorAtual.getNome() + " andou " + valorRoll + " casas!");
@@ -113,6 +117,7 @@ public class Main {
             }
         }
 
+        //Relatório de fim de partida
         System.out.println("\n==================================");
         System.out.println("======= RELATÓRIO FINAL ========");
         System.out.println("==================================");

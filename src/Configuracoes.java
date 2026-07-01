@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Configuracoes {
+    //Dados iniciais
     private double saldoInicial = 2500.00;
     private double salarioBase = 1000.00;
     private int turnos = 10;
@@ -18,6 +19,7 @@ public class Configuracoes {
 
     Scanner input = new Scanner(System.in);
 
+    //Dados já preenchidos para conseguir jogar direto sem configurar
     Profissao profEspeculador = new Profissao("Especulador", 1.2, 1.1, 1.0, 1.0);
     Profissao profNegociante = new Profissao("Negociante", 1.0, 1.0, 0.9, 1.0);
     Profissao profAdvogado = new Profissao("Advogado", 1.0, 0.0, 1.0, 1.0);
@@ -46,6 +48,7 @@ public class Configuracoes {
         imoveisCadastrados.add(new Imovel("Palacete de Petrópolis", 3500.00, 800.00, 1.0));
     }
 
+    //Customiza imóveis, jogadores e regras do jogo
     public void configurar() {
         boolean configurando = true;
         int escolha;

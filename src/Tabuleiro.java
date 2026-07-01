@@ -31,6 +31,7 @@ public class Tabuleiro<T> {
         tamanho++;
     }
 
+    //Move o jogador, e rola dados usando o método rolagem() para decidir o número de casas para mover
     public int moverJogador(Jogador j, boolean andandoFrente){
         int valorRoll = rolagem();
         Casa<T> posicao = j.getPosAtual();
@@ -55,6 +56,7 @@ public class Tabuleiro<T> {
         return valorRoll;
     }
 
+    //Move o jogador, com o valor dependendo da carta de avançar/voltar que foi pega
     public int moverJogador(Jogador j, int qtdCasas, boolean andandoFrente) {
         Casa<T> posicao = j.getPosAtual();
         System.out.println(j.getNome() + (andandoFrente ? " andou " : " voltou ") + qtdCasas + " casas");
@@ -80,6 +82,7 @@ public class Tabuleiro<T> {
     }
 
 
+    //Rola 2 dados e pege o resultado
     public int rolagem() {
         int valorRoll = dado.nextInt(1, 7) + dado.nextInt(1, 7);
         return valorRoll;
