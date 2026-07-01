@@ -52,7 +52,6 @@ public class Main {
         while (turnosRestantes > 0) {
             Jogador jogadorAtual = jogo.jogadores.get(ordemAtual);
 
-            // --- PAINEL DE INFORMAÇÕES DO JOGADOR ---
             System.out.println("\n=============================================");
             System.out.println("-- Turnos restantes: " + turnosRestantes + " --");
             System.out.println(
@@ -73,7 +72,6 @@ public class Main {
             }
             System.out.println("\n=============================================");
 
-            // --- NOVA ENTRADA SIMPLIFICADA ---
             System.out.print("Digite qualquer tecla e pressione ENTER para rolar os dados: ");
             input.next(); // Captura qualquer entrada do usuário para prosseguir
 
@@ -86,7 +84,6 @@ public class Main {
                 parouEm.acao(jogadorAtual);
             }
 
-            // --- CHECAGEM DE FALÊNCIA ---
             if (jogadorAtual.saldo < 0) {
                 System.out.println(
                         "!!! FALÊNCIA !!! O jogador " + jogadorAtual.getNome() + " faliu e está fora da partida!");
@@ -102,7 +99,6 @@ public class Main {
                 ordemAtual--;
             }
 
-            // --- CHECAGEM DE FIM DE JOGO ANTECIPADO ---
             if (jogo.jogadores.size() == 1) {
                 System.out.println("\nPartida encerrada antecipadamente! Restou apenas um jogador vivo.");
                 break;
@@ -110,7 +106,6 @@ public class Main {
 
             ordemAtual++;
 
-            // --- FIM DA RODADA DE TODOS OS JOGADORES ---
             if (ordemAtual == qtdJogadores) {
                 System.out.println("\n>>> Fim da rodada <<<");
                 turnosRestantes--;
@@ -118,7 +113,6 @@ public class Main {
             }
         }
 
-        // --- RELATÓRIO FINAL ---
         System.out.println("\n==================================");
         System.out.println("======= RELATÓRIO FINAL ========");
         System.out.println("==================================");
@@ -143,7 +137,6 @@ public class Main {
         System.out.println("\n[CLASSIFICAÇÃO DOS JOGADORES]");
         System.out.println("----------------------------------");
 
-        // Ordenação por patrimônio
         for (int i = 0; i < jogo.jogadores.size() - 1; i++) {
             for (int j = 0; j < jogo.jogadores.size() - 1 - i; j++) {
                 double patrimonioA = jogo.jogadores.get(j).saldo + calcularValorImoveis(jogo.jogadores.get(j), imoveis);
